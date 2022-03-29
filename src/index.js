@@ -1,32 +1,18 @@
-function binaryToDecimal(){
-    var binaryNumber = $("#number_binary").val();
-    var binaryArray = binaryNumber.split("")
-    
-    var previousValue = 0
-    var result = 0
+import React from 'react';
+import * as ReactDOMClient from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-    binaryArray.forEach(b => {
-        previousValue = previousValue * 2 + parseInt(b);
-    });
+const container = document.getElementById('root');
 
-    result = previousValue;
-    $("#number_decimal").val(result);
-}
+// Create a root.
+const root = ReactDOMClient.createRoot(container);
 
-function decimalToBinary(){
-    var decimalNumber = parseInt($("#number_decimal").val());
-    
-    var quotient = decimalNumber;
-    var remainder = 0;
-    var result = (decimalNumber % 2).toString();
+// Initial render: Render an element to the root.
+root.render(<App/>);
 
-    while (quotient > 1) {
-        quotient = parseInt(quotient / 2)
-        remainder = quotient % 2
-        result = remainder + result
-    }
-
-    console.log(result);
-    $("#number_binary").val(result);
-
-}
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
