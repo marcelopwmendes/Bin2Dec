@@ -3,10 +3,29 @@ import React, { useState } from 'react';
 const Input = () => {
     const [binNum, setBinNum] = useState("");
     const [decNum, setDecNum] = useState(0);
+
     const [isBinToDecConversion, setIsBinToDecConversion] = useState(true);
+    const [isBinaryNumber, setIsBinaryNumber] = useState(true);
 
     const handleBinaryInput = (e) => {
         const { value } = e.target;
+        if (value === "") {
+            setIsBinaryNumber(true);
+            setBinNum(value);
+            return;
+        }
+
+        const valueArr = value.split("");
+
+        let flag = true;
+
+        valueArr.forEach(element => {
+            if (element !== "0" && element !== "1") {
+                flag = false;
+            }
+        });
+
+        setIsBinaryNumber(flag);
         setBinNum(value);
     }
 
@@ -60,6 +79,7 @@ const Input = () => {
             {isBinToDecConversion
                 ? <>
                     <div>
+                        {!isBinaryNumber ? <div> <label style={{border: "solid", borderColor: "#F8D7DA", backgroundColor: "#F8D7DA", color: "#721C24"}}> The inserted number is not binary! </label> </div> : ""}
                         <label id="label_number_binary"> Enter binary Number </label>
                         <input type="number" id="number_binary" value={binNum} onChange={handleBinaryInput} />
                     </div><div>
